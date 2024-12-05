@@ -11,11 +11,6 @@ const comparePassword = async (password, hashedPassword) => {
   return isMatch;
 };
 
-const comparePasswordTest = async (password, hashedPassword) => {
-  const isMatch = await bcrpyt.compare(password, hashedPassword);
-  return isMatch;
-};
-
 const HashingUtils = { encryptPassword, comparePassword, comparePasswordTest };
 
 module.exports = HashingUtils;

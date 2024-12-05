@@ -1,16 +1,16 @@
-const HashingUtils = require('../../utils/Hashing');
-const db = require('../database/models');
-const JWTUtils = require('../../utils/JWT');
+const HashingUtils = require("../../utils/Hashing");
+const db = require("../database/models");
+const JWTUtils = require("../../utils/JWT");
 
 const registerNewUser = async (phone, password) => {
   // check if the phone number is already registered
   const foundUser = await db.user.findOne({
     where: {
-      phone
-    }
+      phone,
+    },
   });
   if (foundUser) {
-    throw new Error('User already Exists');
+    throw new Error("User already Exists");
   }
   // create a new user
   // generate a hash of the password
@@ -26,18 +26,41 @@ const registerNewUser = async (phone, password) => {
 const loginUser = async (phone, password) => {
   // check if the user has registered or not
   const foundUser = await db.user.findOne({
-    phone
+    phone,
   });
   if (!foundUser) {
-    throw new Error('User not found');
+    throw new Error("User not found");
   }
   // compare the password
-  const isPasswordValid = await HashingUtils.comparePassword(password, foundUser.password);
+  const isPasswordValid = await HashingUtils.comparePassword(
+    password,
+    foundUser.password
+  );
   if (!isPasswordValid) {
-    throw new Error('Invalid Password');
+    throw new Error("Invalid Password");
   }
   const token = JWTUtils.generateToken(foundUser);
   return token;
 };
 
-module.exports = { registerNewUser, loginUser };
+const loginUserTest = async (phone, password) => {
+  // check if the user has registered or not
+  const foundUser = await db.user.findOne({
+    phone,
+  });
+  if (!foundUser) {
+    throw new Error("User not found");
+  }
+  // compare the password
+  const isPasswordValid = await HashingUtils.comparePassword(
+    password,
+    foundUser.password
+  );
+  if (!isPasswordValid) {
+    throw new Error("Invalid Password");
+  }
+  const token = JWTUtils.generateToken(foundUser);
+  return token;
+};
+
+module.exports = { registerNewUser, loginUser, loginUserTest };
