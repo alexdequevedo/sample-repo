@@ -43,24 +43,4 @@ const loginUser = async (phone, password) => {
   return token;
 };
 
-const loginUserTest = async (phone, password) => {
-  // check if the user has registered or not
-  const foundUser = await db.user.findOne({
-    phone,
-  });
-  if (!foundUser) {
-    throw new Error("User not found");
-  }
-  // compare the password
-  const isPasswordValid = await HashingUtils.comparePassword(
-    password,
-    foundUser.password
-  );
-  if (!isPasswordValid) {
-    throw new Error("Invalid Password");
-  }
-  const token = JWTUtils.generateToken(foundUser);
-  return token;
-};
-
-module.exports = { registerNewUser, loginUser, loginUserTest };
+module.exports = { registerNewUser, loginUser };
