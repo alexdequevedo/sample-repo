@@ -1,4 +1,4 @@
-const bcrpyt = require('bcrypt');
+const bcrpyt = require("bcrypt");
 
 const encryptPassword = async (passwordString) => {
   const salt = await bcrpyt.genSalt(10);
@@ -12,4 +12,5 @@ const comparePassword = async (password, hashedPassword) => {
 };
 
 const HashingUtils = { encryptPassword, comparePassword };
+console.log("hi");
 module.exports = HashingUtils;
