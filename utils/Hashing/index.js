@@ -12,5 +12,5 @@ const comparePassword = async (password, hashedPassword) => {
 };
 
 const HashingUtils = { encryptPassword, comparePassword };
-console.log("hi");
+
 module.exports = HashingUtils;
