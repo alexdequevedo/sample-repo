@@ -21,9 +21,6 @@ function formatDate(date, format = "YYYY-MM-DD") {
     YYYY: dateObj.getFullYear(),
     MM: String(dateObj.getMonth() + 1).padStart(2, "0"),
     DD: String(dateObj.getDate()).padStart(2, "0"),
-    HH: String(dateObj.getHours()).padStart(2, "0"),
-    mm: String(dateObj.getMinutes()).padStart(2, "0"),
-    ss: String(dateObj.getSeconds()).padStart(2, "0"),
   };
 
   return format.replace(
